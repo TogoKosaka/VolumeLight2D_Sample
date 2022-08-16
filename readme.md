@@ -10,3 +10,10 @@ URL(準備中 pdf版の頒布後に更新します)
 
 ■Wireframe
 ![](images/VL2D_Final_1.png)
+
+■起動方法
+1. `Window/Package Manager` から `2D` をインストール
+2. 同様に `Universal RP` をインストール
+3. Assets/VL2D/Sceans/2DTest.unityを起動
+
+※特に操作等はありませんので動作を眺めるだけです
