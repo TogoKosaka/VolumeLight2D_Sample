@@ -130,7 +130,7 @@ namespace VL2D
         /// <param name="radius">半径</param>
         public void UpdateMesh(int degree, float radius)
         {
-            ///// 【リスト2.1: ベースとなるメッシュの頂点座標を計算】に当たる部分 /////
+            ///// 【リスト6.1: ベースとなるメッシュの頂点座標を計算】に当たる部分 /////
             // 基本形である扇形の外側部分の頂点を計算し、レイキャスト対象として追加
             var zeroPosition = new Vector3(transform.position.x, transform.position.y, 0f);
             var startDirection = Quaternion.Euler(0f, 0f, degree / 2f) * Forward;
@@ -149,7 +149,7 @@ namespace VL2D
                 currentDegree = Mathf.Min(currentDegree + splitDegree, degree);
             }
 
-            ///// 【リスト2.5: ボックスコライダーのワールド頂点座標を取得】に当たる部分
+            ///// 【リスト6.5: ボックスコライダーのワールド頂点座標を取得】に当たる部分
             // 視界範囲の障害物の頂点をレイキャスト対象として追加
             var colliders = FindObjectsOfType<Collider2D>();
             var colliderVerticies = new List<Vector3>();
@@ -207,7 +207,7 @@ namespace VL2D
                 selfCollider.enabled = false;
             }
 
-            ///// 【リスト2.4: ベースの頂点へ向けてレイキャスト】に当たる部分 (+ 外周部レイキャスト頂点)
+            ///// 【リスト6.4: ベースの頂点へ向けてレイキャスト】に当たる部分 (+ 外周部レイキャスト頂点)
             // 基本のメッシュ頂点 + 円周部レイキャストで追加したメッシュ頂点 へ向けて原点からレイキャスト
             var allVerticies = new List<Vector3>();
             var inverseAngle = Mathf.Atan2(Forward.y, Forward.x) * Mathf.Rad2Deg; // メッシュを右向きに戻すための角度
@@ -218,7 +218,7 @@ namespace VL2D
                 allVerticies.Add(Quaternion.Euler(0f, 0f, -inverseAngle) * (ray * (result.collider == null ? radius : result.distance)));
             }
 
-            ///// 【リスト2.6: コライダーの頂点座標へ2度レイキャスト処理】に当たる部分
+            ///// 【リスト6.6: コライダーの頂点座標へ2度レイキャスト処理】に当たる部分
             // 周辺のコライダー頂点へ向けて原点から2回ずつ僅かに角度をずらしながらレイキャスト
             const float AdditionalCheckDifferenceAngle = 0.1f;
             foreach (var target in colliderVerticies)
@@ -256,13 +256,13 @@ namespace VL2D
                 selfCollider.enabled = true;
             }
 
-            ///// 【リスト2.7: 生成した頂点座標を並べなおし】に当たる部分
+            ///// 【リスト6.7: 生成した頂点座標を並べなおし】に当たる部分
             // 基準角度からの成す角によって並べ替え ついでに原点追加
             var orderBaseDirection = Quaternion.Euler(0f, 0f, degree / 2f) * Vector3.right;
             allVerticies = allVerticies.OrderBy(v => Mathf.Repeat(Vector3.SignedAngle(orderBaseDirection, v.normalized, -Vector3.forward), 360)).ToList();
             allVerticies.Add(Vector3.zero);
 
-            ///// 【リスト2.2: UVを計算】に当たる部分
+            ///// 【リスト6.2: UVを計算】に当たる部分
             // UVを計算
             var allUvs = new List<Vector2>();
             foreach (var vertex in allVerticies)
@@ -270,7 +270,7 @@ namespace VL2D
                 allUvs.Add((vertex / radius) * 0.5f + new Vector3(0.5f, 0.5f));
             }
 
-            ///// 【リスト2.3: インデックスを計算】に当たる部分
+            ///// 【リスト6.3: インデックスを計算】に当たる部分
             // インデックスを計算
             var indexes = new List<int>();
             for (int i = 0; i < allVerticies.Count - 2; i++)
