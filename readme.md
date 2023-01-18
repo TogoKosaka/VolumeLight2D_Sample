@@ -1,9 +1,9 @@
 # ■概要
 2DのVolumeLight表現を行うUnityプロジェクトのサンプルです。<br>
-詳細は後日頒布予定の別紙(pdfあり)にてご紹介させて頂く予定です。<br>
+下記URLで紹介しているKLabTechBook Vol.10にて、内容について説明させていただいております。<br>
 
-■別紙資料<br>
-URL(準備中 pdf版の頒布後に更新します)
+■KLabTechBook Vol.10<br>
+https://www.klab.com/jp/blog/tech/2022/tbf13.html
 
 ■Sample
 ![](images/VL2D_Final_0.png)
